@@ -1,7 +1,6 @@
-class Crossover:
-    def __init__(self):
-        pass
+import Base.Base as Base
 
+class Crossover(Base):
     def density_crossover(self):
         pass
 
@@ -31,4 +30,3 @@ class Crossover:
 
     def replacement_crossover(self):
         pass
-

@@ -1,7 +1,6 @@
-class Mutation:
-    def __init__(self):
-        pass
+import Base.Base as Base
 
+class Mutation(Base):
     def double_mutation(self):
         pass
 
@@ -15,4 +14,7 @@ class Mutation:
         pass
 
     def changing_mutation(self):
+        pass
+
+    def inversion(self):
         pass
