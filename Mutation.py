@@ -1,4 +1,4 @@
-import Base.Base as Base
+from Base import Base
 
 class Mutation(Base):
     def double_mutation(self):

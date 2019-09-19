@@ -1,4 +1,4 @@
-import Base.Base as Base
+from Base import Base
 
 class Selection(Base):
     def truncation_selection(self):
