@@ -6,20 +6,19 @@ class BasicGeneticAlgorithm:
         self.crossover = crossover
         self.mutation = mutation
 
-    def newPopulation(self, evalFitness):
+    def newPopulation(self, x, evalFitness):
         ar = []
-        for i in range(0,100): #откуда брать размер популяции?
-            parents = self.selection(evalFitness)
-            crossover = self.crossover(parents)
-            mutation = self.mutation(crossover)
+        for i in range(0, 100): #откуда брать размер популяции?
+            parents = self.selection.method(x, evalFitness)
+            crossover = self.crossover.method(parents)
+            mutation = self.mutation.method(crossover)
             ar.append(mutation)
         return ar
 
 
     def fit(self):
-        x = self.generator
-        for epoche in range(0,100):#откуда брать критерий остановки?
-            evalFitness = self.fitness(x)
-            newPopulation = self.newPopulation(evalFitness)
-            x = newPopulation
+        population = self.generator
+        for epoche in range(0, 100):#откуда брать критерий остановки?
+            evalFitness = self.fitness.method(population)
+            population = self.newPopulation(population, evalFitness)
 
