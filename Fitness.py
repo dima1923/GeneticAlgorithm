@@ -1,4 +1,6 @@
 from Base import Base
+from numpy import exp, average
 
 class Fitness(Base):
-    pass
+    def my(self, population):
+        return average(exp(population))

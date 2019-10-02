@@ -1,8 +1,13 @@
 from Base import Base
+import random
+import numpy as np
 
 class Mutation(Base):
-    def double_mutation(self):
-        pass
+    def binary_mutation(self,ar):
+        tmp = np.array(ar)
+        position = random.randint(tmp.shape[1])
+        tmp[:,position]=np.invert(tmp[:,position])
+        return tmp
 
     def density_mutation(self):
         pass
