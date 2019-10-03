@@ -14,7 +14,7 @@ class Crossover(Base):
 
     def single_point_crossover(self, parents):
         point = int(parents.shape[1] / 2)
-        offspring = np.empty(2)
+        offspring = np.empty(shape=parents.shape)
         while (point == int(parents.shape[1] / 2)):
             point = random.randint(0, parents.shape[1])
         offspring[0] = np.concatenate((parents[0,0:point],parents[1,point:]), axis=None)

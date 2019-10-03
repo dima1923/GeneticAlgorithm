@@ -1,6 +1,8 @@
 from Base import Base
 from sklearn.metrics import pairwise_distances
-from numpy import argmin
+from numpy import unravel_index
+import numpy as np
+from numpy.random import default_rng
 
 class Selection(Base):
     def truncation_selection(self):
@@ -15,7 +17,12 @@ class Selection(Base):
     def annealing_selection(self):
         pass
 
-    def my_imbreading(self, population, metric='euclidean'):
-        distance = pairwise_distances(population, metric=metric)
-        indexes = argmin(distance)
-        return population[indexes, :]
+    def tournament_selection(self, population, fitness):
+        ans = np.empty(shape=(2,population.shape[1]))
+        for i in range(0,2):
+            tmp = np.array(population)
+            default_rng().shuffle(tmp)
+            tmp = tmp[:self.kwargs['t']]
+            position = fitness(population=tmp).argmax()
+            ans[i] = tmp[position]
+        return ans

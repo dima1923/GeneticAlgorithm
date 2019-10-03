@@ -3,4 +3,4 @@ from numpy import exp, average
 
 class Fitness(Base):
     def my(self, population):
-        return average(exp(population))
+        return average(exp(population), axis=1)
