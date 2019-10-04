@@ -17,4 +17,5 @@ if __name__ == "__main__":
                                                       mutation=mutation,
                                                       sizeOfPopulation=50,
                                                       stopFunction=True)
-    bga.fit()
+    ans=bga.fit()
+    print(ans)

@@ -27,4 +27,4 @@ class BasicGeneticAlgorithm:
         for epoche in range(0, 100):#откуда брать критерий остановки?
             evalFitness = self.fitness(population=population)
             population = self.newPopulation(population, evalFitness)
-        return 0
+        return population[self.fitness(population=population).argmax()]
