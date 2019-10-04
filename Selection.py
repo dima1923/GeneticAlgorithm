@@ -6,18 +6,6 @@ from numpy.random import default_rng
 from random import randint, choice
 
 class Selection(Base):
-    def truncation_selection(self):
-        pass
-
-    def elite_selection(self):
-        pass
-
-    def displacement_selection(self):
-        pass
-
-    def annealing_selection(self):
-        pass
-
     def tournament_selection(self, population, fitness):
         ans = np.empty(shape=(2,population.shape[1]))
         for i in range(0,2):
