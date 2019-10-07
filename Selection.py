@@ -4,7 +4,7 @@ from numpy.random import default_rng
 from random import randint, choice
 
 class Selection(Base):
-
+    #dmitry
     def tournament_selection(self, population, fitness):
         ans = np.empty(shape=(2,population.shape[1]))
         for i in range(0,2):
@@ -14,6 +14,7 @@ class Selection(Base):
             position = fitness(population=tmp).argmax()
             ans[i] = tmp[position]
         return ans
+
 
 #ask NN about Hamming_distance
     def inbreeding_nn(self, population):

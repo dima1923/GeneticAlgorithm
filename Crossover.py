@@ -12,6 +12,7 @@ class Crossover(Base):
     def linear_crossover(self):
         pass
 
+    #dmitry
     def single_point_crossover(self, parents):
         point = int(parents.shape[1] / 2)
         offspring = np.empty(shape=parents.shape)

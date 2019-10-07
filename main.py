@@ -19,5 +19,6 @@ if __name__ == "__main__":
                                                       sizeOfPopulation=50,
                                                       stopFunction=True,
                                                       genPopulation=populationGen)
-    ans=bga.fit()
+    ans = bga.fit()
     print(ans)
+
