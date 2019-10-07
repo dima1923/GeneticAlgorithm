@@ -1,11 +1,10 @@
 from Base import Base
-from sklearn.metrics import pairwise_distances
-from numpy import unravel_index
 import numpy as np
 from numpy.random import default_rng
 from random import randint, choice
 
 class Selection(Base):
+
     def tournament_selection(self, population, fitness):
         ans = np.empty(shape=(2,population.shape[1]))
         for i in range(0,2):

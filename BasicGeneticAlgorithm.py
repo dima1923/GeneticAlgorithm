@@ -2,7 +2,8 @@ import numpy as np
 
 class BasicGeneticAlgorithm:
     def __init__(self, generator, fitness, selection, crossover,
-                 mutation, sizeOfPopulation, stopFunction):
+                 mutation, sizeOfPopulation, stopFunction,
+                 genPopulation):
         self.generator = generator
         self.fitness = fitness
         self.selection = selection
@@ -10,8 +11,9 @@ class BasicGeneticAlgorithm:
         self.mutation = mutation
         self.sizeOfPopulation = sizeOfPopulation
         self.stopFunction = stopFunction
+        self.populationGen = genPopulation
 
-    def newPopulation(self, x, evalFitness):
+    def newPopulation(self, x):
         ar = []
         for i in range(0, self.sizeOfPopulation): #откуда брать размер популяции?
             parents = self.selection(population=x, fitness=self.fitness)
@@ -19,12 +21,12 @@ class BasicGeneticAlgorithm:
             mutation = self.mutation(ar=crossover)
             for l in mutation:
                 ar.append(l)
-        return np.array(ar)
+        ans=self.populationGen(parents=x, population=np.array(ar), generator=self.generator, fitness=self.fitness)
+        return np.array(ans)
 
 
     def fit(self):
         population = self.generator(50,100)
         for epoche in range(0, 100):#откуда брать критерий остановки?
-            evalFitness = self.fitness(population=population)
-            population = self.newPopulation(population, evalFitness)
+            population = self.newPopulation(population)
         return population[self.fitness(population=population).argmax()]
