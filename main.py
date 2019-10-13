@@ -19,7 +19,7 @@ if __name__ == "__main__":
                                                       sizeOfPopulation=100,
                                                       stopFunction=True,
                                                       genPopulation=populationGen,
-                                                      numberChromosome=100)
+                                                      numberChromosome=100, epoche=350)
     ans = bga.fit()
     print(ans)
 

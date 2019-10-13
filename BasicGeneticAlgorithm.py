@@ -2,17 +2,20 @@ import numpy as np
 
 class BasicGeneticAlgorithm:
     def __init__(self, generator, fitness, selection, crossover,
-                 mutation, sizeOfPopulation, stopFunction,
-                 genPopulation, numberChromosome, **kwargs):
+                 mutation, sizeOfPopulation,
+                 genPopulation, numberChromosome, epoche =100, error=0.001,
+                 stopFunctionChange=False, **kwargs):
         self.generator = generator
         self.fitness = fitness
         self.selection = selection
         self.crossover = crossover
         self.mutation = mutation
         self.sizeOfPopulation = sizeOfPopulation
-        self.stopFunction = stopFunction
+        self.stopFunctionChange = stopFunctionChange
         self.populationGen = genPopulation
         self.numberChromosome = numberChromosome
+        self.epoche = epoche
+        self.error = error
         self.otherArgs = kwargs
 
     def newPopulation(self, x):
@@ -28,6 +31,11 @@ class BasicGeneticAlgorithm:
 
     def fit(self):
         population = self.generator(self.sizeOfPopulation, self.numberChromosome)
-        for epoche in range(0, 100):#откуда брать критерий остановки?
+        i = 0
+        old_fit = np.inf
+        while ((i!=self.epoche and self.stopFunctionChange is False)
+               or (np.abs(old_fit-self.fitness(population=population).argmax()) <= self.error and self.stopFunctionChange is True)):
+            old_fit = self.fitness(population=population).argmax()
             population = self.newPopulation(population)
+            i += 1
         return population[self.fitness(population=population).argmax()]
