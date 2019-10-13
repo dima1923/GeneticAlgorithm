@@ -1,7 +1,7 @@
 import BasicGeneticAlgorithm, Crossover, Fitness, Mutation, Selection, Population
 from numpy.random import default_rng
 
-def genPopulation(n, k):
+def genBinaryPopulation(n, k):
     ans = default_rng().integers(low=0, high=2, size=(n,k))
     return ans
 
@@ -11,14 +11,15 @@ if __name__ == "__main__":
     selection = Selection.Selection('tournament_selection', t=4)
     mutation = Mutation.Mutation('binary_mutation')
     populationGen = Population.Population('elite_selection')
-    bga = BasicGeneticAlgorithm.BasicGeneticAlgorithm(generator=genPopulation,
+    bga = BasicGeneticAlgorithm.BasicGeneticAlgorithm(generator=genBinaryPopulation,
                                                       fitness=fitness,
                                                       crossover=crossover,
                                                       selection=selection,
                                                       mutation=mutation,
-                                                      sizeOfPopulation=50,
+                                                      sizeOfPopulation=100,
                                                       stopFunction=True,
-                                                      genPopulation=populationGen)
+                                                      genPopulation=populationGen,
+                                                      numberChromosome=100)
     ans = bga.fit()
     print(ans)
 
