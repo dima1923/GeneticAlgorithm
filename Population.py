@@ -4,6 +4,8 @@ import numpy as np
 class Population(Base):
     def truncation_selection(self):
         pass
+
+
     #dmitry
     def elite_selection(self, parents, population, generator,
                         fitness, sizeOfPopulation, **kwargs):

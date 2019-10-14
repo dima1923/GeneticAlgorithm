@@ -17,6 +17,11 @@ class Crossover(Base):
 
     #dmitry
     def single_point_crossover(self, parents:np.ndarray):
+        """
+
+        :param parents:
+        :return:
+        """
         tmp = np.empty(shape=parents.shape)
         j = 0
         while parents.shape[0] != 0:

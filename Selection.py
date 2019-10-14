@@ -4,24 +4,16 @@ from numpy.random import default_rng
 from random import randint
 
 class Selection(Base):
-    #dmitry
-    def tournament_selection(self, population, fitness):
-        try:
-            t = self.kwargs['t']
-        except KeyError:
-            raise AttributeError
-        ans = np.empty(shape=(int(np.ceil(0.9*population.shape[0])),population.shape[1]))
-        tmp = np.array(population)
-        for i in range(0,int(np.ceil(0.9*population.shape[0]))):
-            default_rng().shuffle(tmp)
-            position = fitness(population=tmp[:t]).argmax()
-            ans[i] = tmp[position]
-            tmp = np.delete(tmp, position, 0)
-        return ans
+    n_osob = 15
 
     #NN
     @staticmethod
     def Hamming_distance(individ_1, individ_2):
+        """
+        функция вычисления Хэммингого расстояния
+        :param: индивидуумы
+        :return: количество позиций, в которых индивидуумы отличаются
+        """
         distance = 0;
         len_1 = len(individ_1)
         len_2 = len(individ_2)
@@ -49,7 +41,9 @@ class Selection(Base):
     #NN
     def inbreeding_nn(self, population):
         """
-        :param population:массив сгенерированных особей; выходные данные: массив из двух выбранных родителей
+        функция выбора пары родителей
+        первый родитель выбирается случайно, вторым выбирается такой, который наиболее похож на первого
+        :param population : массив сгенерированных особей
         :return: массив из двух выбранных родителей
         """
         rand_index = randint(0, len(population) - 1)
@@ -74,7 +68,13 @@ class Selection(Base):
 
     #NN
     def outbreeding_nn(self, population):
-        rand_index = randint(0, n_osob - 1)
+        """
+        функция выбора пары родителей
+        первый родитель выбирается случайно, вторым выбирается такой, который наименее похож на первого
+        :param population : массив сгенерированных особей
+        :return: массив из двух выбранных родителей
+        """
+        rand_index = randint(0, self.n_osob - 1)
         parent_1 = population[rand_index]
         max_hamming_dist = 0
         candidates = []
@@ -93,6 +93,12 @@ class Selection(Base):
 
 
     def panmixia_nn(self, population):
+        """
+        функция выбора пары родителей
+        оба родителя выбираются случайно, каждая особь популяции имеет равные шансы быть выбранной
+        :param population : массив сгенерированных особей
+        :return: массив из двух выбранных родителей
+        """
         rand_index_1 = randint(0, len(population) - 1)
         parent_1 = population[rand_index_1]
         while True:
@@ -105,33 +111,99 @@ class Selection(Base):
         return [parent_1, parent_2]
 
 #Komiv
-    def selection(self, pr, individ):#??????????
+    def selection(self, population, fitness):#??????????
+
+        """
+        значение приспособленности особи > ср значения приспособленности по популяции
+        :param: population : массив сгенерированных особей
+                fitness : значение приспособленности для всей популяции
+        :return: массив новой популяции
+        """
         selectia = []
-        sr_pr = np.mean(pr)
-        for i in range(len(individ)):
-            if pr[i] > sr_pr:
-                selectia.append(individ[i])
+        sr_pr = np.mean(fitness)
+        for i in range(len(population)):
+            if fitness[i] > sr_pr:
+                selectia.append(population[i])
         print(sr_pr)
         return selectia
 
-    def turnir(self, individ, pr):
+    #dmitry
+    def tournament_selection(self, population, fitness):
+        """
+        Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
+        В новую популяцию поподает та, у которой лучше значение функции приспособленности
+        :param: population : массив сгенерированных особей
+                fitness : значение приспособленности для всей популяции
+        :return: массив новой популяции
+        """
+        try:
+            t = self.kwargs['t']
+        except KeyError:
+            raise AttributeError
+        ans = np.empty(shape=(int(np.ceil(0.9*population.shape[0])),population.shape[1]))
+        tmp = np.array(population)
+        for i in range(0,int(np.ceil(0.9*population.shape[0]))):
+            default_rng().shuffle(tmp)
+            position = fitness(population=tmp[:t]).argmax()
+            ans[i] = tmp[position]
+            tmp = np.delete(tmp, position, 0)
+        return ans
+
+    def tournament_selection_NN(self, population, fitness):
+        """
+        Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
+        В новую популяцию поподает та, у которой лучше значение функции приспособленности
+        :param: population : массив сгенерированных особей
+                fitness : значение приспособленности для всей популяции
+        :return: массив новой популяции
+        """
+        new_population = []
+        for i in range(self.n_osob):
+            ind_osob_1 = randint(0, len(population) - 1)
+            select_1 = population[ind_osob_1]
+            while True:
+                ind_osob_2 = randint(0, len(population) - 1)
+                if (ind_osob_2 != ind_osob_1):
+                    select_2 = population[ind_osob_2]
+                    break
+                else:
+                    continue
+            if (fitness[ind_osob_1] > fitness[ind_osob_2]):
+                new_population.append(select_1)
+            else:
+                new_population.append(select_2)
+        return new_population
+
+    def tournament_selection_Man(self, population , fitness):
+        """
+        Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
+        В новую популяцию поподает та, у которой лучше значение функции приспособленности
+        :param: population : массив сгенерированных особей
+                fitness : значение приспособленности для всей популяции
+        :return: массив новой популяции
+        """
         t = 2
         turn = []
-        for i in range(len(individ)):
+        for i in range(len(population)):
             choice = []
             for j in range(t):
-                x = choice(pr)
-                k = list(pr).index(x)
+                x = choice(fitness)
+                k = list(fitness).index(x)
                 choice.extend([x, k])
             if choice[t - 2] > choice[t]:
-                turn.append(individ[int(choice[t - 1])])
+                turn.append(population[int(choice[t - 1])])
             else:
-                turn.append(individ[int(choice[t + 1])])
+                turn.append(population[int(choice[t + 1])])
 
         return turn
 
 
     def roulette(self, F, n):
+        """
+
+        :param n:
+        :return:
+        """
         import random
         total_fit = sum(F)
         rel_fit = [i / total_fit for i in F]
