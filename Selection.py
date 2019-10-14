@@ -1,24 +1,23 @@
 from Base import Base
 import numpy as np
 from numpy.random import default_rng
+import random
 from random import randint
 
 class Selection(Base):
     n_osob = 15
 
-    #NN
     @staticmethod
     def Hamming_distance(individ_1, individ_2):
-        """
+        """ NN
         функция вычисления Хэммингого расстояния
-        :param: индивидуумы
+        :param: individ_1, individ_2 : индивидуумы
         :return: количество позиций, в которых индивидуумы отличаются
         """
         distance = 0;
         len_1 = len(individ_1)
         len_2 = len(individ_2)
         if (len_1 > len_2):
-            diff = len_1 - len_2
             for i in range(len_2):
                 if i > 1:
                     if (individ_2[i] != individ_1[i]):
@@ -27,7 +26,6 @@ class Selection(Base):
                 else:
                     distance += 1
         else:
-            diff = len_2 - len_1
             for i in range(len_1):
                 if i > 1:
                     if (individ_1[i] != individ_2[i]):
@@ -35,11 +33,10 @@ class Selection(Base):
                         distance += dis
                 else:
                     distance += 1
-        # distance += diff
         return distance
 
-    #NN
-    def inbreeding_nn(self, population):
+
+    def inbreeding_NN(self, population):
         """
         функция выбора пары родителей
         первый родитель выбирается случайно, вторым выбирается такой, который наиболее похож на первого
@@ -66,8 +63,8 @@ class Selection(Base):
         parent_2 = candidates[rand_index_2]
         return [parent_1, parent_2]
 
-    #NN
-    def outbreeding_nn(self, population):
+
+    def outbreeding_NN(self, population):
         """
         функция выбора пары родителей
         первый родитель выбирается случайно, вторым выбирается такой, который наименее похож на первого
@@ -92,7 +89,7 @@ class Selection(Base):
         return [parent_1, parent_2]
 
 
-    def panmixia_nn(self, population):
+    def panmixia_NN(self, population):
         """
         функция выбора пары родителей
         оба родителя выбираются случайно, каждая особь популяции имеет равные шансы быть выбранной
@@ -111,8 +108,7 @@ class Selection(Base):
         return [parent_1, parent_2]
 
 #Komiv
-    def selection(self, population, fitness):#??????????
-
+    def selection(self, population, fitness):
         """
         значение приспособленности особи > ср значения приспособленности по популяции
         :param: population : массив сгенерированных особей
@@ -174,7 +170,7 @@ class Selection(Base):
                 new_population.append(select_2)
         return new_population
 
-    def tournament_selection_Man(self, population , fitness):
+    def tournament_selection_Man(self, population, fitness):
         """
         Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
         В новую популяцию поподает та, у которой лучше значение функции приспособленности
@@ -194,29 +190,51 @@ class Selection(Base):
                 turn.append(population[int(choice[t - 1])])
             else:
                 turn.append(population[int(choice[t + 1])])
-
         return turn
 
-
-    def roulette(self, F, n):
+    def roulette_selection_NN(self, population, fitness):
         """
-
-        :param n:
-        :return:
+        Для каждой особи высчитываем вероятность поподания в новую популяцию(отношение приспособленности к сумме всех
+        приспособленностей). Далее рандомно выбираем особь и путем рандомного выбора k = [0;1] определяем попала
+        ли особь в новую популяцию. Т.е. её вероятность должна быть больше k.
+        :param: population : массив сгенерированных особей
+                fitness : значение приспособленности для всей популяции
+        :return: массив новой популяции
         """
-        import random
-        total_fit = sum(F)
-        rel_fit = [i / total_fit for i in F]
+        summ_i = 0
+        probabilities = []
+        new_population = []
+        j = 0
+        for i in range(len(population)):
+            summ_i += fitness[i]
+
+        for i in range(len(population)):
+            probabilities.append(fitness[i] / summ_i)
+
+        while j < self.n_osob:
+            i = randint(0, len(population) - 1)
+            k = random()
+            if (probabilities[i] > k):
+                new_population.append(population[i])
+                j += 1
+        return new_population
+
+    def roulette_selection_Man(self, population, fitness):
+        total_fit = sum(fitness)
+        rel_fit = [i / total_fit for i in fitness]
         prob_list = [sum(rel_fit[:i + 1]) for i in range(len(rel_fit))]
-
-        chosen_indivs = []
-        for i in range(n):
+        chosen_index = []
+        for i in range(len(population)):
             point = random.random()
             index = -1
             for j in prob_list:
                 index += 1
                 if point <= j:
-                    chosen_indivs.append(index)
+                    chosen_index.append(index)
                     break
-
+        indivs_1 = population
+        chosen_indivs = []
+        for i in chosen_index:
+            chosen_indivs.append(indivs_1[i])
         return chosen_indivs
+
