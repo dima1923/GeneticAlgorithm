@@ -70,7 +70,7 @@ class Mutation(Base):
 
 
 # ??????????????????
-    def transposition_mutation_Man(self, R):
+    def transposition_mutation_DTD(self, R):
         """
         перестановка
         :param R: матрица особей, заслуживших право на мутацию (по сути, родителей)
@@ -89,7 +89,7 @@ class Mutation(Base):
         return list_g
 
 
-    def inversion_Man(self, R):
+    def inversion_DTD(self, R):
         """
         Хромосома делиться на 2 части и затем они меняются местами
         :param R: матрица особей, заслуживших право на мутацию (по сути, родителей)

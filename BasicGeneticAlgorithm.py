@@ -34,8 +34,8 @@ class BasicGeneticAlgorithm:
         i = 0
         old_fit = np.inf
         while ((i!=self.epoche and self.stopFunctionChange is False)
-               or (np.abs(old_fit-self.fitness(population=population).argmax()) <= self.error and self.stopFunctionChange is True)):
-            old_fit = self.fitness(population=population).argmax()
+               or (np.abs(old_fit-self.fitness(population=population).argmin()) <= self.error and self.stopFunctionChange is True)):
+            old_fit = self.fitness(population=population).argmin()
             population = self.newPopulation(population)
             i += 1
-        return population[self.fitness(population=population).argmax()]
+        return population[self.fitness(population=population).argmin()]

@@ -36,7 +36,7 @@ class Selection(Base):
         return distance
 
 
-    def inbreeding_NN(self, population):
+    def inbreeding_NN(self, population, **kwargs):
         """
         функция выбора пары родителей
         первый родитель выбирается случайно, вторым выбирается такой, который наиболее похож на первого
@@ -64,7 +64,7 @@ class Selection(Base):
         return [parent_1, parent_2]
 
 
-    def outbreeding_NN(self, population):
+    def outbreeding_NN(self, population, **kwargs):
         """
         функция выбора пары родителей
         первый родитель выбирается случайно, вторым выбирается такой, который наименее похож на первого
@@ -89,7 +89,7 @@ class Selection(Base):
         return [parent_1, parent_2]
 
 
-    def panmixia_NN(self, population):
+    def panmixia_NN(self, population, **kwargs):
         """
         функция выбора пары родителей
         оба родителя выбираются случайно, каждая особь популяции имеет равные шансы быть выбранной
@@ -108,7 +108,7 @@ class Selection(Base):
         return [parent_1, parent_2]
 
 #Komiv
-    def selection(self, population, fitness):
+    def selection(self, population, fitness, **kwargs):
         """
         значение приспособленности особи > ср значения приспособленности по популяции
         :param: population : массив сгенерированных особей
@@ -124,7 +124,7 @@ class Selection(Base):
         return selectia
 
     #dmitry
-    def tournament_selection(self, population, fitness):
+    def tournament_selection(self, population, fitness, **kwargs):
         """
         Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
         В новую популяцию поподает та, у которой лучше значение функции приспособленности
@@ -140,12 +140,12 @@ class Selection(Base):
         tmp = np.array(population)
         for i in range(0,int(np.ceil(0.9*population.shape[0]))):
             default_rng().shuffle(tmp)
-            position = fitness(population=tmp[:t]).argmax()
+            position = fitness(population=tmp[:t]).argmin()
             ans[i] = tmp[position]
             tmp = np.delete(tmp, position, 0)
         return ans
 
-    def tournament_selection_NN(self, population, fitness):
+    def tournament_selection_NN(self, population, fitness, **kwargs):
         """
         Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
         В новую популяцию поподает та, у которой лучше значение функции приспособленности
@@ -170,7 +170,7 @@ class Selection(Base):
                 new_population.append(select_2)
         return new_population
 
-    def tournament_selection_Man(self, population, fitness):
+    def tournament_selection_DTD(self, population, fitness, **kwargs):
         """
         Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
         В новую популяцию поподает та, у которой лучше значение функции приспособленности
@@ -192,7 +192,7 @@ class Selection(Base):
                 turn.append(population[int(choice[t + 1])])
         return turn
 
-    def roulette_selection_NN(self, population, fitness):
+    def roulette_selection_NN(self, population, fitness, **kwargs):
         """
         Для каждой особи высчитываем вероятность поподания в новую популяцию(отношение приспособленности к сумме всех
         приспособленностей). Далее рандомно выбираем особь и путем рандомного выбора k = [0;1] определяем попала
@@ -219,7 +219,7 @@ class Selection(Base):
                 j += 1
         return new_population
 
-    def roulette_selection_Man(self, population, fitness):
+    def roulette_selection_DTD(self, population, fitness, **kwargs):
         total_fit = sum(fitness)
         rel_fit = [i / total_fit for i in fitness]
         prob_list = [sum(rel_fit[:i + 1]) for i in range(len(rel_fit))]
