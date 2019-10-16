@@ -1,5 +1,6 @@
 from Base import Base
 import random
+from random import randint
 import numpy as np
 
 class Crossover(Base):
@@ -15,12 +16,14 @@ class Crossover(Base):
     def linear_crossover(self):
         pass
 
-    #dmitry
+
     def single_point_crossover(self, parents:np.ndarray, **kwargs):
         """
-
-        :param parents:
-        :return:
+        Из родителей рандомно выбираются 2 особи. Определяется точка разрыва (случайным образом).
+        Потомок определяется как конкатенация части первого и второго родителя.
+        Меняются частями с выбранной точкой раздела.
+        :param parents: все родители
+        :return: потомки
         """
         tmp = np.empty(shape=parents.shape)
         j = 0
@@ -53,3 +56,44 @@ class Crossover(Base):
 
     def replacement_crossover(self):
         pass
+
+    def crossover_NN(self, p1, p2, MainPos=2):
+        """
+        Хромосома ребенка наследует в вероятностью 50/50 ген одного из родителей.
+        Если длина хромосомы будет наследована от большего родителя, то недостающие
+        гены будут также унаследованы у этого родителя
+        :param p1: хромосома 1 родителя
+        :param p2: хромосома 2 родителя
+        :param MainPos: кол-во дополнительных признаков
+        :return: хромосома наследника (наследников?)
+        """
+
+        def error(p1, p2, pos):
+            if not (isinstance(p1, list) and isinstance(p2, list)):
+                raise ArithmeticError("one or both from parents not list")
+            if (pos > len(p1) or pos > len(p2)):
+                raise ArithmeticError("this position %d out of range parent's lists")
+        def randBol(b=1):
+            return randint(0, b)
+        def introduction(p1, p2, pos):
+            child = list()
+            if pos != 0:
+                for i in range(0, pos):
+                    child.append(p2[i] if randBol() else p1[i])
+            return child
+        def adder(a, b):
+            child.append(a if randBol() else b)
+            return len(child)
+
+        error(p1, p2, MainPos)
+        child = introduction(p1, p2, MainPos)
+        if (p2[MainPos] - p1[MainPos] < 0):
+            p = p1.copy()
+            p1 = p2.copy()
+            p2 = p
+        pos = adder(p2[MainPos], p1[MainPos])
+        for i in range(pos, p1[MainPos] + pos):
+            pos = adder(p2[i], p1[i])
+        if child[MainPos] == p2[MainPos]:
+            child += p2[pos:]
+        return child
