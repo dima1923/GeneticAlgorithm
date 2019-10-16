@@ -4,7 +4,7 @@ import numpy as np
 
 class Mutation(Base):
 
-    def binary_mutation(self, ar):
+    def binary_mutation(self, ar, **kwargs):
         """
         Входит особь для мутации. Выбирается рандомная позиция разделения на части.
         Части меняются местами.

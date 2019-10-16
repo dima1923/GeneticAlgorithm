@@ -16,7 +16,7 @@ class Crossover(Base):
         pass
 
     #dmitry
-    def single_point_crossover(self, parents:np.ndarray):
+    def single_point_crossover(self, parents:np.ndarray, **kwargs):
         """
 
         :param parents:
