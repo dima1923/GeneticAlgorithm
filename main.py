@@ -19,45 +19,6 @@ def genBinaryPopulation(n, k):
     ans = default_rng().integers(low=0, high=2, size=(n,k))
     return ans
 
-""" NN
-def individual(length, min_, max_, n_class):
-    count_chrom = 15;
-    min_ = 1; #global variable
-    max_ = 10; #global variable
-    n_class = 3;
-    :param length: длина особи
-    :param min_: мин кол-во нейронов в слоях
-    :param max_: макс кол-во нейронов в слоях
-    :param n_class: кол-ва классов
-    :return: сгенерированный индивид
-    
-    individ = []
-    #функция активации
-    individ.append(choice(['relu', 'elu', 'tanh', 'sigmoid']))
-    #доля train выборки
-    individ.append(round(uniform(0,0.9),2))
-    #количество скрытых слоев и количество нейронов на них
-    individ.append(length)
-    for x in range(length - 1):
-        individ.append(randint(min_, max_))
-    individ.append(n_class)
-    return individ
-
-def generate_population(n_osob, min_, max_, n_class):
-    
-    :param n_osob: кол-во особей в популяции
-    :param min_: мин кол-во нейронов в слоях
-    :param max_: макс кол-во нейронов в слоях
-    :param n_class: кол-ва классов
-    :return: сгенерированная популяция
-    
-    population = []
-    for i in range(n_osob):
-        length_individ = randint(2, 10)
-        population.append(individual(length_individ,min_, max_, n_class))
-    return population
-"""
-
 ## удалила list_g и list_i
 def GenPop_Man(n, k):
     """
@@ -86,6 +47,46 @@ def generate_first_population_Tepl(n,k):
         random.shuffle(osob)
         population[i] = osob
     return population
+
+
+""" NN
+def individual(length, min_, max_, n_class):
+    count_chrom = 15;
+    min_ = 1; #global variable
+    max_ = 10; #global variable
+    n_class = 3;
+    :param length: длина особи
+    :param min_: мин кол-во нейронов в слоях
+    :param max_: макс кол-во нейронов в слоях
+    :param n_class: кол-ва классов
+    :return: сгенерированный индивид
+
+    individ = []
+    #функция активации
+    individ.append(choice(['relu', 'elu', 'tanh', 'sigmoid']))
+    #доля train выборки
+    individ.append(round(uniform(0,0.9),2))
+    #количество скрытых слоев и количество нейронов на них
+    individ.append(length)
+    for x in range(length - 1):
+        individ.append(randint(min_, max_))
+    individ.append(n_class)
+    return individ
+
+def generate_population(n_osob, min_, max_, n_class):
+
+    :param n_osob: кол-во особей в популяции
+    :param min_: мин кол-во нейронов в слоях
+    :param max_: макс кол-во нейронов в слоях
+    :param n_class: кол-ва классов
+    :return: сгенерированная популяция
+
+    population = []
+    for i in range(n_osob):
+        length_individ = randint(2, 10)
+        population.append(individual(length_individ,min_, max_, n_class))
+    return population
+"""
 
 if __name__ == "__main__":
     fitness = Fitness.Fitness('my')
