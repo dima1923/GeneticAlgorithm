@@ -20,3 +20,28 @@ class Population(Base):
 
     def annealing_selection(self):
         pass
+
+"""
+    def generate_new_population_Tepl(self, pop, new_pop, data):
+        
+        Создание новой популяции.
+        Заполняем таблицу middle элементами pop/new_pop и добавляем столбец значений фитнес-функции каждого юнита
+        Все юниты упорядочиваются по уменьшению значений своих ФФ
+        :param pop: массив со старым поколением
+        :param new_pop: массив с мутированным поколением
+        :param data: таблица ценности
+        :return:
+        
+        output = np.arange(NUM_POPULATION * len(pop[0])).reshape((NUM_POPULATION, len(pop[0])))
+        middle = np.arange(2 * NUM_POPULATION * (len(pop[0]) + 1)).reshape((2 * NUM_POPULATION, len(pop[0]) + 1))
+        for c, v in enumerate(pop):
+            v = np.append(v, fitness_f(data, v))
+            middle[c] = v
+        for c, v in enumerate(new_pop):
+            v = np.append(v, fitness_f(data, v))
+            middle[c + NUM_POPULATION] = v
+        middle = sorted(middle, key=itemgetter(len(pop[0])))
+        middleR = np.array([np.array(midi) for midi in middle])
+        output = middleR[NUM_POPULATION:, :len(pop[0])]
+        return output
+"""

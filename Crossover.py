@@ -67,7 +67,6 @@ class Crossover(Base):
         :param MainPos: кол-во дополнительных признаков
         :return: хромосома наследника (наследников?)
         """
-
         def error(p1, p2, pos):
             if not (isinstance(p1, list) and isinstance(p2, list)):
                 raise ArithmeticError("one or both from parents not list")

@@ -54,19 +54,20 @@ class Fitness(Base):
         z = np.around(z, decimals=5)
         return z
 
+"""
     def fitness_f_Tepl(self, data, unit):
-        """
+        
         Расчет фитнесс-функции для каждого юнита
         Суммарное значение фитнесс-функций по таблице ценностей
         :param data: таблица ценности
         :param unit: конкретная особь
         :return:
-        """
+        
         sum = 0
         for c, u in enumerate(unit):
             sum += data.item((c, u - 1))
         return sum
-
+"""
 
 """ NN
 

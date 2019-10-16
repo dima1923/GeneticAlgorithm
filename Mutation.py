@@ -1,6 +1,8 @@
 from Base import Base
 import random
 import numpy as np
+##NN
+from random import randint
 
 class Mutation(Base):
 
@@ -26,34 +28,38 @@ class Mutation(Base):
     def real_mutation(self):
         pass
 
-    def gen_mut_ZON(self, unit):
-        """
+"""
+    def gen_mut_Tep(self, unit):
+        
         Генная мутация юникода.
         При  длине генокода больше 1, выбирает 2 рандомных гена и меняет их местами
         :param unit: генекод
         :return:
-        """
+        
         if len(unit) > 1:
             i, j = 0, 0
             while i == j:
                 i, j = random.randint(0, len(unit) - 1), random.randint(0, len(unit) - 1)
             unit[i], unit[j] = unit[j], unit[i]
         return unit
+"""
 
-    def chromo_mut(self, unit):
-        """
+"""
+    def chromo_mut_Tep(self, unit):
+        
         Проводит хромосомную мутацию юнита
         При  длине генокода больше 1,  выбирает отрезок случайной длины,
         меняет порядок генов на противоположный (1234->4321)
         :param unit: генекод
         :return:
-        """
+        
         if len(unit) > 1:
             sp = random.randint(0, len(unit) - 2)
             len_mut = random.randint(2, len(unit) - sp)
             b_unit = unit[sp:sp + len_mut]
             unit[sp:sp + len_mut] = b_unit[::-1]
         return unit
+"""
 
     def insertion_deleting_mutation_NN(self, population):
         """
