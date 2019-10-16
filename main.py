@@ -1,7 +1,8 @@
 import BasicGeneticAlgorithm, Crossover, Fitness, Mutation, Selection, Population
 from numpy.random import default_rng
-## import pandas as pd
-## import random as rd
+## Man
+import pandas as pd
+import random as rd
 ## Tepl
 import numpy as np
 import random
@@ -10,18 +11,20 @@ from random import randint, choice, uniform
 
 def genBinaryPopulation(n, k):
     """
-
-    :param n:
-    :param k:
-    :return:
+    :param n: количество особей
+    :param k: количество генов
+    :return: сгенерированная популяция
     """
+    ## мин и макс число в рандоме, размерность матрицы ans
     ans = default_rng().integers(low=0, high=2, size=(n,k))
     return ans
 
-
 """ NN
 def individual(length, min_, max_, n_class):
-    
+    count_chrom = 15;
+    min_ = 1; #global variable
+    max_ = 10; #global variable
+    n_class = 3;
     :param length: длина особи
     :param min_: мин кол-во нейронов в слоях
     :param max_: макс кол-во нейронов в слоях
@@ -55,42 +58,34 @@ def generate_population(n_osob, min_, max_, n_class):
     return population
 """
 
-""" Man
-def GenPop(N, l):
+## удалила list_g и list_i
+def GenPop_Man(n, k):
+    """
+    :param n: кол-во особей в популяции
+    :param k: кол-во генов особи
+    :return: сгенерированная популяция
+    """
+    population = []
+    for i in range(n):
+        population.append(rd.sample(range(1, k + 1), k))
+    return population
 
-    :param N: объём формируемой популяции
-    :param l: кол-во генов в одной особи (кол-во элементов вектора, характеризующего особь)
-    :return: особь + гены
 
-    Indiv = []
-    for i in range(N):
-        Indiv.append(rd.sample(range(1, l + 1), l))
-    list_g = []
-    for i in range(l):
-        list_g.append("gen_{}".format(i + 1))
-    list_i = []
-    for i in range(N):
-        list_i.append("indiv_{}".format(i + 1))
-    return pd.DataFrame(Indiv, index=list_i, columns=list_g)
-"""
-
-""" Tepl
-def generate_first_population_Tepl(NUM_POPULATION,length):
-    
-    Создание стартовой популяции.
-    Создаем массив размерности NUM_POPULATION на length.
-    Создаем особь, заполняем генами от 1 до length и перемешиваем гены внутри особи
-    :param NUM_POPULATION: кол-во особей в популяции
-    :param length: кол-во генов особи
-    :return:
-    
-    population = np.arange(NUM_POPULATION*length).reshape((NUM_POPULATION, length))
-    for i in range(NUM_POPULATION):
-        osob = np.arange(1, length + 1 , 1)
+## +++
+def generate_first_population_Tepl(n,k):
+    """
+    :param n: кол-во особей в популяции
+    :param k: кол-во генов особи
+    :return: сгенерированная популяция
+    """
+    # массив размерности n на k
+    population = np.arange(n*k).reshape((n, k))
+    for i in range(n):
+        # особь, заполняем генами от 1 до k и перемешиваем гены внутри особи
+        osob = np.arange(1, k + 1 , 1)
         random.shuffle(osob)
         population[i] = osob
     return population
-"""
 
 if __name__ == "__main__":
     fitness = Fitness.Fitness('my')
