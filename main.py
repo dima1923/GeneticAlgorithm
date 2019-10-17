@@ -21,6 +21,7 @@ def genBinaryPopulation(n, k):
     ans = default_rng().integers(low=0, high=2, size=(n,k))
     return ans
 
+
 ## удалила list_g и list_i, они по сути только для красивого вывода
 def genPopulation_Man(n, k):
     """
@@ -34,7 +35,6 @@ def genPopulation_Man(n, k):
     return population
 
 
-## +++
 def genPopulation_Tepl(n,k):
     """
     :param n: кол-во особей в популяции
@@ -70,8 +70,7 @@ def genIndividual_NN(k, min_, max_, n_class):
         individ.append(randint(min_, max_))
     individ.append(n_class)
     return individ
-## вставила k, вместо рандомной длины особи
-## как понимаю, это единственный выход не общего вида
+## вставила k, убрала рандомную длину особи
 def genPopulation_NN(n,k):
     """
     :param n: кол-во особей в популяции
