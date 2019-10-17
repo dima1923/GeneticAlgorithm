@@ -35,7 +35,7 @@ class Selection(Base):
                     distance += 1
         return distance
 
-
+## вместо двух отдельных родителей возвращает массив из 2 родителей
     def inbreeding_NN(self, population, **kwargs):
         """
         функция выбора пары родителей
@@ -43,27 +43,28 @@ class Selection(Base):
         :param population : массив сгенерированных особей
         :return: массив из двух выбранных родителей
         """
+        parents = []
         rand_index = randint(0, len(population) - 1)
-        parent_1 = population[rand_index]
+        parents.append(population[rand_index])
         min_hamming_dist = 99999
         candidates = []
         for i in range(0, len(population)):
             if (i == rand_index):
                 continue
             else:
-                tmp = self.Hamming_distance(parent_1, population[i])
+                tmp = self.Hamming_distance(parents[0], population[i])
                 if (tmp < min_hamming_dist):
                     min_hamming_dist = tmp
         l = 0
         for j in range(0, len(population)):
-            if (self.Hamming_distance(parent_1, population[j]) == min_hamming_dist):
+            if (self.Hamming_distance(parents[0], population[j]) == min_hamming_dist):
                 candidates.append(population[j])
                 l += 1
         rand_index_2 = randint(0, l - 1)
-        parent_2 = candidates[rand_index_2]
-        return [parent_1, parent_2]
+        parents.append(candidates[rand_index_2])
+        return parents
 
-
+## вместо двух отдельных родителей возвращает массив из 2 родителей
     def outbreeding_NN(self, population, **kwargs):
         """
         функция выбора пары родителей
@@ -71,24 +72,25 @@ class Selection(Base):
         :param population : массив сгенерированных особей
         :return: массив из двух выбранных родителей
         """
+        parents = []
         rand_index = randint(0, self.n_osob - 1)
-        parent_1 = population[rand_index]
+        parents.append(population[rand_index])
         max_hamming_dist = 0
         candidates = []
         for i in range(0, len(population)):
-            tmp = self.Hamming_distance(parent_1, population[i])
+            tmp = self.Hamming_distance(parents[0], population[i])
             if (tmp > max_hamming_dist):
                 max_hamming_dist = tmp
         l = 0
         for j in range(0, len(population)):
-            if (self.Hamming_distance(parent_1, population[j]) == max_hamming_dist):
+            if (self.Hamming_distance(parents[0], population[j]) == max_hamming_dist):
                 candidates.append(population[j])
                 l += 1
         rand_index_2 = randint(0, l - 1)
-        parent_2 = candidates[rand_index_2]
-        return [parent_1, parent_2]
+        parents.append(candidates[rand_index_2])
+        return parents
 
-
+## вместо двух отдельных родителей возвращает массив из 2 родителей
     def panmixia_NN(self, population, **kwargs):
         """
         функция выбора пары родителей
@@ -96,16 +98,17 @@ class Selection(Base):
         :param population : массив сгенерированных особей
         :return: массив из двух выбранных родителей
         """
+        parents = []
         rand_index_1 = randint(0, len(population) - 1)
-        parent_1 = population[rand_index_1]
+        parents.append(population[rand_index_1])
         while True:
             rand_index_2 = randint(0, len(population) - 1)
             if (rand_index_2 != rand_index_1):
-                parent_2 = population[rand_index_2]
+                parents.append(population[rand_index_2])
                 break
             else:
                 continue
-        return [parent_1, parent_2]
+        return parents
 
 #Komiv
     def selection(self, population, fitness, **kwargs):
