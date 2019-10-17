@@ -21,7 +21,7 @@ def genBinaryPopulation(n, k):
     ans = default_rng().integers(low=0, high=2, size=(n,k))
     return ans
 
-## удалила list_g и list_i
+## удалила list_g и list_i, они по сути только для красивого вывода
 def genPopulation_Man(n, k):
     """
     :param n: кол-во особей в популяции
@@ -70,7 +70,8 @@ def genIndividual_NN(k, min_, max_, n_class):
         individ.append(randint(min_, max_))
     individ.append(n_class)
     return individ
-## +++
+## вставила k, вместо рандомной длины особи
+## как понимаю, это единственный выход не общего вида
 def genPopulation_NN(n,k):
     """
     :param n: кол-во особей в популяции
@@ -82,7 +83,6 @@ def genPopulation_NN(n,k):
     n_class = 3
     population = []
     for i in range(n):
-        # length_individ = randint(2, 10)
         population.append(genIndividual_NN(k ,min_, max_, n_class))
     return population
     
