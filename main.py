@@ -70,7 +70,7 @@ def genIndividual_NN(k, min_, max_, n_class):
         individ.append(randint(min_, max_))
     individ.append(n_class)
     return individ
-
+## +++
 def genPopulation_NN(n,k):
     """
     :param n: кол-во особей в популяции
