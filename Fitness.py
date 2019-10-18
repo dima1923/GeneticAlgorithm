@@ -15,8 +15,8 @@ class Fitness(Base):
         return average(exp(population), axis=1)
 
 
-    @staticmethod
-    def summ_rasst_Man(individ, distant):
+
+    def Fit_Man(self, individ, distant):
         """
         функция расчета суммы расстояний между городами для каждой особи
         :param individ: массив сгенерированных особей
