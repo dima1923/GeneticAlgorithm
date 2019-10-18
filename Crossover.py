@@ -57,35 +57,18 @@ class Crossover(Base):
     def replacement_crossover(self):
         pass
 
-
-
-
-    def expand_population(self, parent_selection, population, count_children):
-        """
-        функция создания детей
-        :param parent_selection:
-        :param population:
-        :param count_children:
-        :return: популяция с новыми членами
-        """
-        childrens = list()
-        new_population = population
-        for i in range(count_children):
-            parents = parent_selection(population)
-            childrens.append(crossover(parents[0], parents[1]))
-        new_population += childrens
-        return population
-
-    def crossover_NN(self, p1, p2):
+    def crossover_NN(self, parents):
         """
         Хромосома ребенка наследует в вероятностью 50/50 ген одного из родителей.
         Если длина хромосомы будет наследована от большего родителя, то недостающие
         гены будут также унаследованы у этого родителя
         :param p1: хромосома 1 родителя
         :param p2: хромосома 2 родителя
-        :return: хромосома наследника (наследников?)
+        :return: хромосома наследников
         """
         MainPos=2
+        p1 = parents[0]
+        p2 = parents[1]
         def error_NN(p1, p2, pos):
             if not (isinstance(p1, list) and isinstance(p2, list)):
                 raise ArithmeticError("one or both from parents not list")
