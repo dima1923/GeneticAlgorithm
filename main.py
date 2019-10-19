@@ -116,7 +116,7 @@ if __name__ == "__main__":
     NN = len(data_cities) #считываем количество городов
     fitness = Fitness.Fitness('Fit_Man')
     crossover = Crossover.Crossover('empty')
-    selection = Selection.Selection('tournament_selection_Man', t=4)
+    selection = Selection.Selection('tournament_selection_Man')
     mutation = Mutation.Mutation('transposition_mutation_Man')
     populationGen = Population.Population('NewGen_Man')
     bga = BasicGeneticAlgorithm.BasicGeneticAlgorithm(generator=genPopulation_Man,

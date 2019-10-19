@@ -14,7 +14,6 @@ class Population(Base):
         """
         Берем все особи из родителей и потомков.
         На основе приспособленности отбираем лучших. Из них берем 20%
-
         :return:
         """
         tmp = np.concatenate((parents, population), axis=0)
@@ -60,17 +59,17 @@ class Population(Base):
 
     def NewGen_Man(self, parents, population, fitness, data, **kwargs):
         new_generation = []
-        method = 'prob'
         method = 'tour'
+        inver_prob = ///
 
-        elites = self.Elite_Man(population, fitness, data)
-        indivs = population
+        elites = self.Elite_Man(parents, fitness, data)
+        indivs = parents
         for i in elites:
             indivs.remove(i)  # Удаляем тех особей, которые были признаны Элитными
         resid = len(indivs)  # Записываем в переменную resid количество оставленных особей
         F = fitness(indivs)  # список с приспособленностями
         new_generation.extend(elites)  # Добавляем список из элитных особей в новое поколение
-
+        """
         if method == 'tour':  # Проверяем условие на метод
             mutation_list = parents(indivs, F)
             mutation_list = mutation_list.drop(len(mutation_list.columns) - 1,
@@ -88,7 +87,7 @@ class Population(Base):
             mutation_list = mutation_list.values.tolist()  # Переводим DataFrame в список
             mut_ind = Mutation(mutation_list)  # Производим мутацию выбранных особей
             mut_ind = mut_ind.values.tolist()  # Переводим DataFrame в список
-
+        """
         if inver_prob != 0:  # Проверяем условие на инверсию
             inver_list = []
             for i in mut_ind:
@@ -103,4 +102,4 @@ class Population(Base):
         new_generation.extend(mut_ind)  # Добавляем список из мутировавших особей в новое поколение
         new_generation.extend(inver_ind)  # Добавляем список из особей, подвергнувшихся и
 
-        return pd.DataFrame(new_generation)
+        return new_generation
