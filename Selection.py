@@ -29,13 +29,59 @@ class Selection(Base):
             tmp = np.delete(tmp, position, 0)
         return ans
 
+
+
+    def tournament_selection_Man(self, population, fitness, **kwargs):
+        """
+        Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
+        В новую популяцию поподает та, у которой лучше значение функции приспособленности
+        :param: population : массив сгенерированных особей
+                fitness : значение приспособленности для всей популяции
+        :return: массив новой популяции
+        """
+        t = 2
+        turn = []
+        for i in range(len(population)):
+            choice = []
+            for j in range(t):
+                x = choice(fitness)
+                k = list(fitness).index(x)
+                choice.extend([x, k])
+            if choice[t - 2] > choice[t]:
+                turn.append(population[int(choice[t - 1])])
+            else:
+                turn.append(population[int(choice[t + 1])])
+        return turn
+
+    def roulette_selection_Man(self, population, fitness, **kwargs):
+        total_fit = sum(fitness)
+        rel_fit = [i / total_fit for i in fitness]
+        prob_list = [sum(rel_fit[:i + 1]) for i in range(len(rel_fit))]
+        chosen_index = []
+        for i in range(len(population)):
+            point = random.random()
+            index = -1
+            for j in prob_list:
+                index += 1
+                if point <= j:
+                    chosen_index.append(index)
+                    break
+        indivs_1 = population
+        chosen_indivs = []
+        for i in chosen_index:
+            chosen_indivs.append(indivs_1[i])
+        return chosen_indivs
+
+
+
+    """
     @staticmethod
     def Hamming_distance(individ_1, individ_2):
-        """ NN
+        
         функция вычисления Хэммингого расстояния
         :param: individ_1, individ_2 : индивидуумы
         :return: количество позиций, в которых индивидуумы отличаются
-        """
+        
         distance = 0;
         len_1 = len(individ_1)
         len_2 = len(individ_2)
@@ -59,12 +105,12 @@ class Selection(Base):
 
 ## вместо двух отдельных родителей возвращает массив из 2 родителей
     def inbreeding_NN(self, population, **kwargs):
-        """
+        
         функция выбора пары родителей
         первый родитель выбирается случайно, вторым выбирается такой, который наиболее похож на первого
         :param population : массив сгенерированных особей
         :return: массив из двух выбранных родителей
-        """
+        
         parents = []
         rand_index = randint(0, len(population) - 1)
         parents.append(population[rand_index])
@@ -88,12 +134,12 @@ class Selection(Base):
 
 ## вместо двух отдельных родителей возвращает массив из 2 родителей
     def outbreeding_NN(self, population, **kwargs):
-        """
+        
         функция выбора пары родителей
         первый родитель выбирается случайно, вторым выбирается такой, который наименее похож на первого
         :param population : массив сгенерированных особей
         :return: массив из двух выбранных родителей
-        """
+        
         parents = []
         rand_index = randint(0, self.n_osob - 1)
         parents.append(population[rand_index])
@@ -114,12 +160,12 @@ class Selection(Base):
 
 ## вместо двух отдельных родителей возвращает массив из 2 родителей
     def panmixia_NN(self, population, **kwargs):
-        """
+        
         функция выбора пары родителей
         оба родителя выбираются случайно, каждая особь популяции имеет равные шансы быть выбранной
         :param population : массив сгенерированных особей
         :return: массив из двух выбранных родителей
-        """
+        
         parents = []
         rand_index_1 = randint(0, len(population) - 1)
         parents.append(population[rand_index_1])
@@ -132,30 +178,14 @@ class Selection(Base):
                 continue
         return parents
 
-#Komiv
-    def selection(self, population, fitness, **kwargs):
-        """
-        значение приспособленности особи > ср значения приспособленности по популяции
-        :param: population : массив сгенерированных особей
-                fitness : значение приспособленности для всей популяции
-        :return: массив новой популяции
-        """
-        selectia = []
-        sr_pr = np.mean(fitness)
-        for i in range(len(population)):
-            if fitness[i] > sr_pr:
-                selectia.append(population[i])
-        print(sr_pr)
-        return selectia
-
     def tournament_selection_NN(self, population, fitness, **kwargs):
-        """
+        
         Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
         В новую популяцию поподает та, у которой лучше значение функции приспособленности
         :param: population : массив сгенерированных особей
                 fitness : значение приспособленности для всей популяции
         :return: массив новой популяции
-        """
+        
         new_population = []
         for i in range(self.n_osob):
             ind_osob_1 = randint(0, len(population) - 1)
@@ -175,14 +205,14 @@ class Selection(Base):
 
 
     def roulette_selection_NN(self, population, fitness, **kwargs):
-        """
+        
         Для каждой особи высчитываем вероятность поподания в новую популяцию(отношение приспособленности к сумме всех
         приспособленностей). Далее рандомно выбираем особь и путем рандомного выбора k = [0;1] определяем попала
         ли особь в новую популяцию. Т.е. её вероятность должна быть больше k.
         :param: population : массив сгенерированных особей
                 fitness : значение приспособленности для всей популяции
         :return: массив новой популяции
-        """
+        
         summ_i = 0
         probabilities = []
         new_population = []
@@ -200,48 +230,7 @@ class Selection(Base):
                 new_population.append(population[i])
                 j += 1
         return new_population
+    """
 
 
-
-
-    def tournament_selection_DTD(self, population, fitness, **kwargs):
-        """
-        Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
-        В новую популяцию поподает та, у которой лучше значение функции приспособленности
-        :param: population : массив сгенерированных особей
-                fitness : значение приспособленности для всей популяции
-        :return: массив новой популяции
-        """
-        t = 2
-        turn = []
-        for i in range(len(population)):
-            choice = []
-            for j in range(t):
-                x = choice(fitness)
-                k = list(fitness).index(x)
-                choice.extend([x, k])
-            if choice[t - 2] > choice[t]:
-                turn.append(population[int(choice[t - 1])])
-            else:
-                turn.append(population[int(choice[t + 1])])
-        return turn
-
-    def roulette_selection_DTD(self, population, fitness, **kwargs):
-        total_fit = sum(fitness)
-        rel_fit = [i / total_fit for i in fitness]
-        prob_list = [sum(rel_fit[:i + 1]) for i in range(len(rel_fit))]
-        chosen_index = []
-        for i in range(len(population)):
-            point = random.random()
-            index = -1
-            for j in prob_list:
-                index += 1
-                if point <= j:
-                    chosen_index.append(index)
-                    break
-        indivs_1 = population
-        chosen_indivs = []
-        for i in chosen_index:
-            chosen_indivs.append(indivs_1[i])
-        return chosen_indivs
 

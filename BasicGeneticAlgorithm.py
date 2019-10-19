@@ -26,7 +26,7 @@ class BasicGeneticAlgorithm:
                                  data=self.data)
         mutation = self.mutation(ar=crossover, generator=self.generator, fitness=self.fitness,
                                  data=self.data)
-        ans=self.populationGen(parents=x, population=mutation,
+        ans = self.populationGen(parents=x, population=mutation,
                                generator=self.generator, fitness=self.fitness,
                                sizeOfPopulation=self.sizeOfPopulation,
                                data=self.data)
@@ -38,8 +38,8 @@ class BasicGeneticAlgorithm:
         i = 0
         old_fit = np.inf
         while ((i != self.epoche and self.stopFunctionChange is False)
-               or (np.abs(old_fit-self.fitness(population=population).argmin()) <= self.error and self.stopFunctionChange is True)):
-            old_fit = self.fitness(population=population).argmin()
+               or (np.abs(old_fit-self.fitness(population=population, data=self.data).argmin()) <= self.error and self.stopFunctionChange is True)):
+            old_fit = self.fitness(population=population, data=self.data).argmin()
             population = self.newPopulation(population)
             i += 1
-        return population[self.fitness(population=population).argmin()]
+        return population[self.fitness(population=population, data=self.data).argmin()]

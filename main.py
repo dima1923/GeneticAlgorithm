@@ -17,7 +17,7 @@ def genBinaryPopulation(n, k):
     :return: сгенерированная популяция
     """
     ## мин и макс число в рандоме, размерность матрицы ans
-##    ans = default_rng().integers(low=0, high=2, size=(n,k))
+    ans = default_rng().integers(low=0, high=2, size=(n,k))
     return ans
 
 
@@ -116,13 +116,12 @@ if __name__ == "__main__":
     data_cities = GenMtrx_Man #инициализация условий задачи (считывание матрицы расстояний)
     NN = len(data_cities) #считываем количество городов
     fitness = Fitness.Fitness('Fit_Man') # приспособленность каждой особи, как сумма расстояний между городами
-    crossover = Crossover.Crossover('single_point_crossover')
-    selection = Selection.Selection('tournament_selection', t=4)
-    mutation = Mutation.Mutation('binary_mutation')
+    crossover = Crossover.Crossover('empty')
+    selection = Selection.Selection('tournament_selection_Man', t=4)
+    mutation = Mutation.Mutation('transposition_mutation_Man')
     populationGen = Population.Population('elite_selection')
     bga = BasicGeneticAlgorithm.BasicGeneticAlgorithm(generator=genPopulation_Man,
                                                       fitness=fitness,
-                                                      crossover=crossover,
                                                       selection=selection,
                                                       mutation=mutation,
                                                       sizeOfPopulation=20,

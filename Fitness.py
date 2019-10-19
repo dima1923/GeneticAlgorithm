@@ -16,7 +16,7 @@ class Fitness(Base):
 
 
 
-    def Fit_Man(self, individ, distant):
+    def Fit_Man(self, individ, **kwargs):
         """
         Рассчитываем приспособленность каждой особи, как сумму расстояний между городами.
         :param individ: массив сгенерированных особей
@@ -28,7 +28,7 @@ class Fitness(Base):
             summ = 0
             for j in range(len(individ[0]) - 1):
                 if j != len(individ[0]):
-                    summ += distant[int(individ[int(i)][int(j)] - 1)][int(individ[int(i)][int(j + 1)] - 1)]
+                    summ += kwargs[int(individ[int(i)][int(j)] - 1)][int(individ[int(i)][int(j + 1)] - 1)]
             s.append(summ)
         return s
 
