@@ -16,17 +16,14 @@ class Population(Base):
                                generator(int(np.floor(sizeOfPopulation*0.8)), population.shape[1])],
                               axis=0)
 
-
+"""
     def generate_new_population_Tepl(self, pop, new_pop,fitness, data, sizeOfPopulation):
-        """
-        Создание новой популяции.
-        Заполняем таблицу middle элементами pop/new_pop и добавляем столбец значений фитнес-функции каждого юнита
-        Все юниты упорядочиваются по уменьшению значений своих ФФ
+        
         :param pop: массив со старым поколением
         :param new_pop: массив с мутированным поколением
         :param data: таблица ценности
         :return:
-        """
+        
         output = np.arange(sizeOfPopulation * len(pop[0])).reshape((sizeOfPopulation, len(pop[0])))
         middle = np.arange(2 * sizeOfPopulation * (len(pop[0]) + 1)).reshape((2 * sizeOfPopulation, len(pop[0]) + 1))
         for c, v in enumerate(pop):
@@ -39,7 +36,7 @@ class Population(Base):
         middleR = np.array([np.array(midi) for midi in middle])
         output = middleR[sizeOfPopulation:, :len(pop[0])]
         return output
-
+"""
 
 
     # функция отбирает самых лучших особей из старого поколения в количестве не более 10% от общего объема популяции

@@ -127,6 +127,7 @@ if __name__ == "__main__":
                                                       mutation=mutation,
                                                       sizeOfPopulation=20,
                                                       genPopulation=populationGen,
-                                                      numberChromosome=100, epoche=10)
+                                                      numberChromosome=100, epoche=10,
+                                                      data=data_cities)
     ans = bga.fit()
     print(ans)
