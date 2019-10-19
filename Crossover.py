@@ -4,7 +4,7 @@ from random import randint
 import numpy as np
 
 class Crossover(Base):
-    def empty(self, parents):
+    def empty(self, parents, **kwargs):
         return parents
 
     def density_crossover(self):
@@ -39,33 +39,17 @@ class Crossover(Base):
             parents = np.delete(parents, index_of_parent, 0)
         return tmp
 
-    def double_point_crossover(self):
-        pass
-
-    def multipoint_crossover(self):
-        pass
-
-    def uniform_crossover(self):
-        pass
-
-    def process_crossover(self):
-        pass
-
-    def shuffle_crossover(self):
-        pass
-
-    def replacement_crossover(self):
-        pass
+"""
 
     def crossover_NN(self, parents):
-        """
+        
         Хромосома ребенка наследует в вероятностью 50/50 ген одного из родителей.
         Если длина хромосомы будет наследована от большего родителя, то недостающие
         гены будут также унаследованы у этого родителя
         :param p1: хромосома 1 родителя
         :param p2: хромосома 2 родителя
         :return: хромосома наследников
-        """
+        
         MainPos=2
         p1 = parents[0]
         p2 = parents[1]
@@ -98,3 +82,4 @@ class Crossover(Base):
         if child[MainPos] == p2[MainPos]:
             child += p2[pos:]
         return child
+"""
