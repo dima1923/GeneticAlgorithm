@@ -20,16 +20,11 @@ class BasicGeneticAlgorithm:
         self.otherArgs = kwargs
 
     def newPopulation(self, x):
-        parents = self.selection(population=x, generator=self.generator, fitness=self.fitness,
-                                data=self.data)
-        crossover = self.crossover(parents=parents, generator=self.generator, fitness=self.fitness,
-                                 data=self.data)
-        mutation = self.mutation(ar=crossover, generator=self.generator, fitness=self.fitness,
-                                 data=self.data)
-        ans = self.populationGen(parents=x, population=mutation,
-                               generator=self.generator, fitness=self.fitness,
-                               sizeOfPopulation=self.sizeOfPopulation,
-                               data=self.data)
+        parents = self.selection(population=x, generator=self.generator, fitness=self.fitness, data=self.data)
+        crossover = self.crossover(parents=parents, generator=self.generator, fitness=self.fitness, data=self.data)
+        mutation = self.mutation(ar=crossover, generator=self.generator, fitness=self.fitness, data=self.data)
+        ans = self.populationGen(parents=x, population=mutation, generator=self.generator, fitness=self.fitness,
+                               sizeOfPopulation=self.sizeOfPopulation, data=self.data)
         return ans
 
 

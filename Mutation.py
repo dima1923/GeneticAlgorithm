@@ -12,7 +12,7 @@ class Mutation(Base):
         """
         Входит особь для мутации. Выбирается рандомная позиция разделения на части.
         Части меняются местами.
-        :param ar: крассовер ??? популяция
+        :param ar: крассовер
         :return: мутированная особь
         """
         tmp = np.array(ar)
@@ -25,12 +25,13 @@ class Mutation(Base):
         return tmp
 
 
-    def transposition_mutation_Man(self, R):
+    def transposition_mutation_Man(self, ar, **kwargs):
         """
         перестановка
         :param R: матрица особей, заслуживших право на мутацию (по сути, родителей)
         :return:  матрица мутированных особей
         """
+        R = ar
         for i in range(len(R)):
             # список из двух случайно сгенерированных индексов в диапазоне от 0 до длины хромосомы
             j = random.sample(range(len(R[0])),2)
@@ -38,18 +39,16 @@ class Mutation(Base):
             tmp_2 = R[i][j[1]]
             R[i][j[0]] = tmp_2  # собственно перестановка
             R[i][j[1]] = tmp_1  # собственно перестановка
-        list_g = []
-        for i in range(len(R[0])):
-            list_g.append("gen_{}".format(i + 1))
-        return list_g
+        return R
 
 
-    def inversion_Man(self, R):
+    def inversion_Man(self, ar, **kwargs):
         """
         Хромосома делиться на 2 части и затем они меняются местами
         :param R: матрица особей, заслуживших право на мутацию (по сути, родителей)
         :return: матрица мутированных особей
         """
+        R = ar
         for i in range(len(R)):
             j = random.sample(range(1, len(R[0])), 1)
             tmp = R[i][:j[0] + 1]

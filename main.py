@@ -111,15 +111,14 @@ if __name__ == "__main__":
     ans = bga.fit()
     print(ans)"""
 
-    # sizeOfPopulation - размер поколения
-    # epoches - количество итераций
+
     data_cities = GenMtrx_Man #инициализация условий задачи (считывание матрицы расстояний)
     NN = len(data_cities) #считываем количество городов
-    fitness = Fitness.Fitness('Fit_Man') # приспособленность каждой особи, как сумма расстояний между городами
+    fitness = Fitness.Fitness('Fit_Man')
     crossover = Crossover.Crossover('empty')
     selection = Selection.Selection('tournament_selection_Man', t=4)
     mutation = Mutation.Mutation('transposition_mutation_Man')
-    populationGen = Population.Population('elite_selection')
+    populationGen = Population.Population('NewGen_Man')
     bga = BasicGeneticAlgorithm.BasicGeneticAlgorithm(generator=genPopulation_Man,
                                                       fitness=fitness,
                                                       selection=selection,

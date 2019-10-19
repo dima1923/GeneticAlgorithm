@@ -45,6 +45,7 @@ class Population(Base):
         return output
     """
 
+
     # функция отбирает самых лучших особей из старого поколения в количестве не более 10% от общего объема популяции
     def Elite_Man(self, individs, fitness, data):
         indivs = individs
@@ -57,7 +58,7 @@ class Population(Base):
             F.pop(index)
         return elites
 
-    def NewGen_Man(self, parents, population, mutation, fitness, data, **kwargs):
+    def NewGen_Man(self, parents, population, fitness, data, **kwargs):
         new_generation = []
         method = 'prob'
         method = 'tour'
