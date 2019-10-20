@@ -23,7 +23,7 @@ def genBinaryPopulation(n, k):
 
 # Считывание матрицы расстояний из таблицы Excel
 def GenMtrx_Man():
-    cities = pd.read_excel("GeneticAlgoritm/exl/Man.xlsx", header=None).values.tolist() # Считывание матр
+    cities = pd.read_excel("GeneticAlgorithm\exl\Man.xlsx", header=None).values.tolist() # Считывание матр
     for i in range(len(cities[0])):
         cities[i][i] = float("Inf") # Задаем диагональным значениям бесконечно большое число
     cities = np.around(cities, decimals=0) # Округление числа
