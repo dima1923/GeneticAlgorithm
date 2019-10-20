@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a997c64-dc70-4bab-a34b-41e6c138f329" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/exl/NN.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exl/Tepl.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -16,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="28" column="61" lean-forward="true" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="61" />
+            <state relative-caret-position="178">
+              <caret line="45" column="15" selection-start-line="45" selection-start-column="15" selection-end-line="45" selection-end-column="15" />
               <folding>
                 <element signature="e#0#81#0" expanded="true" />
               </folding>
@@ -28,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BasicGeneticAlgorithm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+            <state relative-caret-position="223">
+              <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -37,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mutation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
+            <state relative-caret-position="143">
+              <caret line="44" column="21" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="21" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -49,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Selection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="715">
-              <caret line="59" column="47" selection-start-line="59" selection-start-column="47" selection-end-line="59" selection-end-column="47" />
+            <state relative-caret-position="330">
+              <caret line="50" column="41" lean-forward="true" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -85,7 +87,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Population.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="741">
+            <state relative-caret-position="291">
               <caret line="64" column="29" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -137,9 +139,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="width" value="1149" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="225" />
+    <option name="y" value="1" />
+    <option name="width" value="1695" />
     <option name="height" value="1044" />
   </component>
   <component name="ProjectView">
@@ -158,10 +161,6 @@
               <item name="GeneticAlgorithm" type="b2602c69:ProjectViewProjectNode" />
               <item name="GeneticAlgorithm" type="462c0819:PsiDirectoryNode" />
               <item name="exl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GeneticAlgorithm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -474,13 +473,20 @@
       <option name="project" value="LOCAL" />
       <updated>1571577074548</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="add">
+      <created>1571577311735</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1571577311735</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="57506000" />
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -490,24 +496,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
-    <editor active="true" />
+    <frame x="542" y="1" width="738" height="696" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18124007" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26533523" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4997233" visible="true" weight="0.35664335" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4997233" visible="true" weight="0.3617021" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.39685315" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32692307" />
       <window_info anchor="bottom" id="Docker" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.17957747" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.17832167" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5002767" side_tool="true" weight="0.32937366" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32795697" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32692307" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32937366" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -585,26 +590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mutation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Selection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="715">
-          <caret line="59" column="47" selection-start-line="59" selection-start-column="47" selection-end-line="59" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Crossover.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="39">
@@ -625,16 +610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Population.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="64" column="29" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
@@ -642,17 +617,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Population.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="64" column="29" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Selection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="50" column="41" lean-forward="true" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mutation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="44" column="21" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BasicGeneticAlgorithm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+        <state relative-caret-position="223">
+          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="28" column="61" lean-forward="true" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="61" />
+        <state relative-caret-position="178">
+          <caret line="45" column="15" selection-start-line="45" selection-start-column="15" selection-end-line="45" selection-end-column="15" />
           <folding>
             <element signature="e#0#81#0" expanded="true" />
           </folding>
