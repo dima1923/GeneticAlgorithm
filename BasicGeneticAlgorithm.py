@@ -1,4 +1,5 @@
 import numpy as np
+from Crossover import Crossover
 
 class BasicGeneticAlgorithm:
     def __init__(self, generator, fitness, selection, crossover,
@@ -8,6 +9,8 @@ class BasicGeneticAlgorithm:
         self.generator = generator
         self.fitness = fitness
         self.selection = selection
+        if crossover is None:
+            crossover = Crossover('empty')
         self.crossover = crossover
         self.mutation = mutation
         self.sizeOfPopulation = sizeOfPopulation
