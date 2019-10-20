@@ -2,9 +2,9 @@ import numpy as np
 from Crossover import Crossover
 
 class BasicGeneticAlgorithm:
-    def __init__(self, generator, fitness, selection, crossover,
+    def __init__(self, generator, fitness, selection,
                  mutation, sizeOfPopulation,
-                 genPopulation, numberChromosome=None, epoche=100, error=0.001,
+                 genPopulation, crossover= None, numberChromosome=None, epoche=100, error=0.001,
                  stopFunctionChange=False, data=None, **kwargs):
         self.generator = generator
         self.fitness = fitness
