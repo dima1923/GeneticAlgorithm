@@ -3,7 +3,7 @@ import numpy as np
 class BasicGeneticAlgorithm:
     def __init__(self, generator, fitness, selection, crossover,
                  mutation, sizeOfPopulation,
-                 genPopulation, numberChromosome, epoche=100, error=0.001,
+                 genPopulation, numberChromosome=None, epoche=100, error=0.001,
                  stopFunctionChange=False, data=None, **kwargs):
         self.generator = generator
         self.fitness = fitness
@@ -33,8 +33,8 @@ class BasicGeneticAlgorithm:
         i = 0
         old_fit = np.inf
         while ((i != self.epoche and self.stopFunctionChange is False)
-               or (np.abs(old_fit-self.fitness(population=population, data=self.data).argmin()) <= self.error and self.stopFunctionChange is True)):
-            old_fit = self.fitness(population=population, data=self.data).argmin()
+               or (np.abs(old_fit-np.array(self.fitness(population=population, data=self.data)).argmin()) <= self.error and self.stopFunctionChange is True)):
+            old_fit = np.array(self.fitness(population=population, data=self.data)).argmin()
             population = self.newPopulation(population)
             i += 1
-        return population[self.fitness(population=population, data=self.data).argmin()]
+        return population[np.array(self.fitness(population=population, data=self.data)).argmin()], min(self.fitness(population=population,data=self.data))

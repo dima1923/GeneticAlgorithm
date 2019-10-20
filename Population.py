@@ -57,49 +57,9 @@ class Population(Base):
             F.pop(index)
         return elites
 
-    def NewGen_Man(self, parents, population, fitness, data, **kwargs):
-        new_generation = []
-        method = 'tour'
-        inver_prob = ///
-
-        elites = self.Elite_Man(parents, fitness, data)
-        indivs = parents
-        for i in elites:
-            indivs.remove(i)  # Удаляем тех особей, которые были признаны Элитными
-        resid = len(indivs)  # Записываем в переменную resid количество оставленных особей
-        F = fitness(indivs)  # список с приспособленностями
-        new_generation.extend(elites)  # Добавляем список из элитных особей в новое поколение
-        """
-        if method == 'tour':  # Проверяем условие на метод
-            mutation_list = parents(indivs, F)
-            mutation_list = mutation_list.drop(len(mutation_list.columns) - 1,
-                                               1)  # Убираем столбец с приспособленностью из DataFrame
-            mutation_list = mutation_list.values.tolist()  # Переводим DataFrame в список
-            mut_ind = Mutation(mutation_list)  # Производим мутацию выбранных особей
-            mut_ind = mut_ind.values.tolist()
-
-        elif method == 'roul':  # Проверяем условие на метод
-            ind = pd.DataFrame(ind)  # Переводим список в DataFrame
-            ind['Fitness'] = F  # Добавляем столбец Fitness с приспособленностями
-            mutation_list = Roulette(ind, resid)  # Добавляем особей в DataFrame на мутацию по методу отбора "Рулетка"
-            mutation_list = mutation_list.drop(len(mutation_list.columns) - 1,
-                                               1)  # Убираем столбец с приспособленностью из DataFrame
-            mutation_list = mutation_list.values.tolist()  # Переводим DataFrame в список
-            mut_ind = Mutation(mutation_list)  # Производим мутацию выбранных особей
-            mut_ind = mut_ind.values.tolist()  # Переводим DataFrame в список
-        """
-        if inver_prob != 0:  # Проверяем условие на инверсию
-            inver_list = []
-            for i in mut_ind:
-                j = random.random()  # Получаем случайное число от 0 до 1
-                if j <= inver_prob:  # Проверяем условие
-                    inver_list.append(i)  # Если число меньше или равно вероятности, то добавляем в список на инверсию
-            for i in inver_list:
-                mut_ind.remove(i)  # Удаляем тех особей из списка mut_ind, которые будут подвержены инверсии
-
-            inver_ind = Inver(inver_list).values.tolist()  # Производим инверсию выбранных особей
-
-        new_generation.extend(mut_ind)  # Добавляем список из мутировавших особей в новое поколение
-        new_generation.extend(inver_ind)  # Добавляем список из особей, подвергнувшихся и
-
-        return new_generation
+    def NewGen_Man(self, parents, population, fitness, data, generator,  **kwargs):
+        elite = self.Elite_Man(parents, fitness, data)
+        new_population = generator(math.ceil(len(parents)*0.9),len(parents[0]))
+        for os in elite:
+            new_population.append(os)
+        return new_population

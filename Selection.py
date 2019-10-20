@@ -31,7 +31,7 @@ class Selection(Base):
 
 
 
-    def tournament_selection_Man(self, population, fitness, **kwargs):
+    def tournament_selection_Man(self, population, fitness, data, **kwargs):
         """
         Рандомно выбираем две особи(без повторения) и сравниваем их приспособленность.
         В новую популяцию поподает та, у которой лучше значение функции приспособленности
@@ -40,12 +40,13 @@ class Selection(Base):
         :return: массив новой популяции
         """
         t = 2
+        fitnes = fitness(population=population, data=data)
         turn = []
         for i in range(len(population)):
             choice = []
             for j in range(t):
-                x = choice(fitness)
-                k = list(fitness).index(x)
+                x = random.choice(fitnes)
+                k = list(fitnes).index(x)
                 choice.extend([x, k])
             if choice[t - 2] > choice[t]:
                 turn.append(population[int(choice[t - 1])])
@@ -53,9 +54,10 @@ class Selection(Base):
                 turn.append(population[int(choice[t + 1])])
         return turn
 
-    def roulette_selection_Man(self, population, fitness, **kwargs):
-        total_fit = sum(fitness)
-        rel_fit = [i / total_fit for i in fitness]
+    def roulette_selection_Man(self, population, fitness, data, **kwargs):
+        fitnes = fitness(population= population, data=data)
+        total_fit = sum(fitnes)
+        rel_fit = [i / total_fit for i in fitnes]
         prob_list = [sum(rel_fit[:i + 1]) for i in range(len(rel_fit))]
         chosen_index = []
         for i in range(len(population)):
