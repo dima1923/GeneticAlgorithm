@@ -124,6 +124,6 @@ if __name__ == "__main__":
                                                       sizeOfPopulation=20,
                                                       genPopulation=populationGen,
                                                       numberChromosome=NN, epoche=10,
-                                                      data=data_cities, crossover=crossover)
+                                                      data=data_cities)
     ans = bga.fit()
     print(ans)
