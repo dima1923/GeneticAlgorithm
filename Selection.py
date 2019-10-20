@@ -1,6 +1,6 @@
 from Base import Base
 import numpy as np
-from numpy.random import default_rng
+from numpy.random import shuffle
 import random
 from random import randint
 
@@ -23,7 +23,7 @@ class Selection(Base):
         ans = np.empty(shape=(int(np.ceil(0.9*population.shape[0])),population.shape[1]))
         tmp = np.array(population)
         for i in range(0,int(np.ceil(0.9*population.shape[0]))):
-            default_rng().shuffle(tmp)
+            shuffle(tmp)
             position = fitness(population=tmp[:t]).argmin()
             ans[i] = tmp[position]
             tmp = np.delete(tmp, position, 0)

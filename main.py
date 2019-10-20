@@ -1,5 +1,5 @@
 import BasicGeneticAlgorithm, Crossover, Fitness, Mutation, Selection, Population
-##from numpy.random import default_rng
+from numpy.random import randint
 ## Man
 import pandas as pd
 import random as rd
@@ -17,7 +17,7 @@ def genBinaryPopulation(n, k):
     :return: сгенерированная популяция
     """
     ## мин и макс число в рандоме, размерность матрицы ans
-    ans = default_rng().integers(low=0, high=2, size=(n,k))
+    ans = randint(low=0, high=2, size=(n,k))
     return ans
 
 
