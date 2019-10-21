@@ -7,6 +7,10 @@ from random import randint
 class Selection(Base):
     n_osob = 15
 
+    # Tepl
+    def empty(self, population, **kwargs):
+        return population
+
     #dmitry
     def tournament_selection(self, population, fitness, **kwargs):
         """

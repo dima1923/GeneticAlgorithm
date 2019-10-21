@@ -15,7 +15,6 @@ class Fitness(Base):
         return average(exp(population), axis=1)
 
 
-
     def Fit_Man(self, population, data, **kwargs):
         """
         Рассчитываем приспособленность каждой особи, как сумму расстояний между городами.
@@ -32,20 +31,23 @@ class Fitness(Base):
             s.append(summ)
         return s
 
-"""
-    def fitness_f_Tepl(self, data, unit):
-        
+
+    def fitness_f_Tepl(self, population, data, **kwargs):
+        """
         Расчет фитнесс-функции для каждого юнита
         Суммарное значение фитнесс-функций по таблице ценностей
         :param data: таблица ценности
         :param unit: конкретная особь
         :return:
-        
-        sum = 0
-        for c, u in enumerate(unit):
-            sum += data.item((c, u - 1))
-        return sum
-"""
+        """
+        fit = []
+        for unit in population:
+            sum = 0
+            for c, u in enumerate(unit):
+                sum += data.item((c, u - 1))
+            fit.append(sum)
+        return fit
+
 
 """ NN
 

@@ -1,5 +1,5 @@
 import BasicGeneticAlgorithm, Crossover, Fitness, Mutation, Selection, Population
-from numpy.random import randint
+from numpy.random import randint as ri
 ## Man
 import pandas as pd
 import random as rd
@@ -17,7 +17,7 @@ def genBinaryPopulation(n, k):
     :return: сгенерированная популяция
     """
     ## мин и макс число в рандоме, размерность матрицы ans
-    ans = randint(low=0, high=2, size=(n,k))
+    ans = ri(low=0, high=2, size=(n,k))
     return ans
 
 def genPopulation_Man(n, k):
@@ -67,7 +67,7 @@ def genIndividual_NN(k, min_, max_, n_class):
         individ.append(randint(min_, max_))
     individ.append(n_class)
     return individ
-## вставила k, убрала рандомную длину особи
+
 def genPopulation_NN(n,k):
     
     :param n: кол-во особей в популяции
@@ -91,10 +91,9 @@ def GenMtrx_Man():  # Считывание матрицы расстояний �
     return cities  # Возвращаем растояния между "городами"
 
 def GenMtrx_Tepl():
-    file = pd.ExcelFile("C:/Users/Валерия/PyCharm/GeneticAlgorithm/exl/Tepl.xlsx")  # EXCEL_NAME
+    file = pd.ExcelFile("C:/Users/Валерия/PyCharm/GeneticAlgorithm/exl/Tepl.xlsx")
     df1 = file.parse('parametrs')
     length = int(df1.iat[0, 1])
-
     df2 = file.parse('data')
     data = df2.iloc[:length, :length]
     data = data.as_matrix(columns=data.columns[:length])
@@ -143,15 +142,11 @@ if __name__ == "__main__":
 
     data = GenMtrx_Tepl()  # инициализация условий задачи (считывание матрицы расстояний)
     NN = len(data)  # считываем количество городов
-    fitness = Fitness.Fitness('my')
-    crossover = Crossover.Crossover('single_point_crossover')
-    selection = Selection.Selection('tournament_selection')
-    mutation = Mutation.Mutation('binary_mutation')
+    fitness = Fitness.Fitness('fitness_f_Tepl')
+    mutation = Mutation.Mutation('mut_Tepl')
     populationGen = Population.Population('elite_selection')
     bga = BasicGeneticAlgorithm.BasicGeneticAlgorithm(generator=genPopulation_Tepl,
                                                       fitness=fitness,
-                                                      crossover=crossover,
-                                                      selection=selection,
                                                       mutation=mutation,
                                                       sizeOfPopulation=10,
                                                       genPopulation=populationGen,

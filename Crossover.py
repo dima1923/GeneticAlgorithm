@@ -7,16 +7,6 @@ class Crossover(Base):
     def empty(self, parents, **kwargs):
         return parents
 
-    def density_crossover(self):
-        pass
-
-    def intermediate_crossover(self):
-        pass
-
-    def linear_crossover(self):
-        pass
-
-
     def single_point_crossover(self, parents:np.ndarray, **kwargs):
         """
         Из родителей рандомно выбираются 2 особи. Определяется точка разрыва (случайным образом).

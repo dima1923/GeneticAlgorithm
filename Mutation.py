@@ -56,14 +56,14 @@ class Mutation(Base):
             R[i].extend(tmp)
         return R
 
-"""
+
     def gen_mut_Tepl(self, unit):
-        
+        """
         Генная мутация юникода.
         При  длине генокода больше 1, выбирает 2 рандомных гена и меняет их местами
         :param unit: генекод
         :return:
-        
+        """
         if len(unit) > 1:
             i, j = 0, 0
             while i == j:
@@ -72,13 +72,13 @@ class Mutation(Base):
         return unit
 
     def chromo_mut_Tepl(self, unit):
-        
+        """
         Проводит хромосомную мутацию юнита
         При  длине генокода больше 1,  выбирает отрезок случайной длины,
         меняет порядок генов на противоположный (1234->4321)
         :param unit: генекод
         :return:
-        
+        """
         if len(unit) > 1:
             sp = random.randint(0, len(unit) - 2)
             len_mut = random.randint(2, len(unit) - sp)
@@ -86,11 +86,11 @@ class Mutation(Base):
             unit[sp:sp + len_mut] = b_unit[::-1]
         return unit
 
-    def mut_Tepl(self, population):
+    def mut_Tepl(self, ar, **kwargs):
         MUT_PROBABILITY = 20
         new_pop=[]
-        for unit in enumerate(population):
-            i, j = np.random.default_rng().random((2,))
+        for unit in enumerate(ar):
+            i, j =  np.random.random().random((2,))
             if i < MUT_PROBABILITY / 100:
                 unit_n = self.gen_mut_Tepl(unit)
             if j < MUT_PROBABILITY / 100:
@@ -98,7 +98,7 @@ class Mutation(Base):
             new_pop.append(unit_n)
         return new_pop
 
-
+"""
     def insertion_deleting_mutation_NN(self, population):
         
         Замена у особи одного случайно выбранного гена случайно выбранным значением из диапазона всевозможных значений генов
