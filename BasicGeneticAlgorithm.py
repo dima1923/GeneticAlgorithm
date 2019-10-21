@@ -3,14 +3,15 @@ from Crossover import Crossover
 from Selection import Selection
 
 class BasicGeneticAlgorithm:
-    def __init__(self, generator, fitness, selection,
+    def __init__(self, generator, fitness,
                  mutation, sizeOfPopulation,
-                 genPopulation, crossover= None, numberChromosome=None, epoche=100, error=0.001,
+                 genPopulation, selection = None, crossover= None, numberChromosome=None, epoche=100, error=0.001,
                  stopFunctionChange=False, data=None, **kwargs):
         self.generator = generator
         self.fitness = fitness
         if selection is None:
             selection = Selection('empty')
+        self.selection = selection
         if crossover is None:
             crossover = Crossover('empty')
         self.crossover = crossover

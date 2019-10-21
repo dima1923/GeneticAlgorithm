@@ -88,14 +88,17 @@ class Mutation(Base):
 
     def mut_Tepl(self, ar, **kwargs):
         MUT_PROBABILITY = 20
-        new_pop=[]
-        for unit in enumerate(ar):
-            i, j =  np.random.random().random((2,))
+        new_pop = []
+        new_pop = np.array(new_pop)
+        unit_n = np.array(unit_n)
+        for counter, unit in enumerate(ar):
+            i, j = np.random.random((2,))
             if i < MUT_PROBABILITY / 100:
                 unit_n = self.gen_mut_Tepl(unit)
             if j < MUT_PROBABILITY / 100:
                 unit_n = self.chromo_mut_Tepl(unit)
-            new_pop.append(unit_n)
+                np.concatenate((new_pop, unit_n), axis=0)
+        print(new_pop)
         return new_pop
 
 """

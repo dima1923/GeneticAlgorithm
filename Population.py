@@ -43,22 +43,23 @@ class Population(Base):
         return new_population
 
 
-    def generate_new_population_Tepl(self, pop, new_pop,fitness, data, sizeOfPopulation):
+    def generate_new_population_Tepl(self, parents, population, fitness, sizeOfPopulation, data, generator,  **kwargs):
         """
         :param pop: массив со старым поколением
         :param new_pop: массив с мутированным поколением
         :param data: таблица ценности
         :return:
         """
-        output = np.arange(sizeOfPopulation * len(pop[0])).reshape((sizeOfPopulation, len(pop[0])))
-        middle = np.arange(2 * sizeOfPopulation * (len(pop[0]) + 1)).reshape((2 * sizeOfPopulation, len(pop[0]) + 1))
-        for c, v in enumerate(pop):
-            v = np.append(v, fitness(data, v))
-            middle[c] = v
-        for c, v in enumerate(new_pop):
-            v = np.append(v, fitness(data, v))
-            middle[c + sizeOfPopulation] = v
-        middle = sorted(middle, key=itemgetter(len(pop[0])))
-        middleR = np.array([np.array(midi) for midi in middle])
-        output = middleR[sizeOfPopulation:, :len(pop[0])]
-        return output
+        #out_put = np.arange(sizeOfPopulation * len(parents[0])).reshape((sizeOfPopulation, len(parents[0])))
+        parents=np.array(parents)
+        population=np.array(population)
+        print(parents.shape)
+        print(population.shape)
+        tmp = np.concatenate((parents, population), axis=0)
+        fitness_sort = np.argsort(fitness(population=tmp, data=data))[-1:-int(np.ceil(len(parents))):-1]
+        np.concatenate([tmp[fitness_sort, :],
+                        generator(int(np.floor(sizeOfPopulation * 0.8)), population.shape[1])],
+                       axis=0)
+        return np.concatenate([tmp[fitness_sort, :],
+                               generator(int(np.floor(sizeOfPopulation*len(parents[1]))), population.shape[1])],
+                              axis=0)

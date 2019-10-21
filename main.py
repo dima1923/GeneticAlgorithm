@@ -47,21 +47,18 @@ def genPopulation_Tepl(n,k):
         population[i] = osob
     return population
 
-"""
+
 def genIndividual_NN(k, min_, max_, n_class):
-    
+    """
     :param k: длина особи
     :param min_: мин кол-во нейронов в слоях
     :param max_: макс кол-во нейронов в слоях
     :param n_class: кол-во классов
     :return: сгенерированный индивид
-    
+    """
     individ = []
-    #функция активации
     individ.append(choice(['relu', 'elu', 'tanh', 'sigmoid']))
-    #доля train выборки
     individ.append(round(uniform(0,0.9),2))
-    #количество скрытых слоев и количество нейронов на них
     individ.append(k)
     for x in range(k - 1):
         individ.append(randint(min_, max_))
@@ -69,11 +66,11 @@ def genIndividual_NN(k, min_, max_, n_class):
     return individ
 
 def genPopulation_NN(n,k):
-    
+    """
     :param n: кол-во особей в популяции
     :param кол-во генов особи
     :return: сгенерированная популяция
-    
+    """
     min_ = 1
     max_ = 10
     n_class = 3
@@ -81,7 +78,7 @@ def genPopulation_NN(n,k):
     for i in range(n):
         population.append(genIndividual_NN(k ,min_, max_, n_class))
     return population
-    """
+
 
 def GenMtrx_Man():  # Считывание матрицы расстояний из таблицы Excel
     cities = pd.read_excel("C:/Users/Валерия/PyCharm/GeneticAlgorithm/exl/Man.xlsx", header=None).values.tolist() # Считывание матр
@@ -140,11 +137,12 @@ if __name__ == "__main__":
     ans = bga.fit()
     print(ans)"""
 
+    """
     data = GenMtrx_Tepl()  # инициализация условий задачи (считывание матрицы расстояний)
     NN = len(data)  # считываем количество городов
     fitness = Fitness.Fitness('fitness_f_Tepl')
     mutation = Mutation.Mutation('mut_Tepl')
-    populationGen = Population.Population('elite_selection')
+    populationGen = Population.Population('generate_new_population_Tepl')
     bga = BasicGeneticAlgorithm.BasicGeneticAlgorithm(generator=genPopulation_Tepl,
                                                       fitness=fitness,
                                                       mutation=mutation,
@@ -152,5 +150,26 @@ if __name__ == "__main__":
                                                       genPopulation=populationGen,
                                                       numberChromosome=NN, epoche=100,
                                                       data=data)
+    ans = bga.fit()
+    print(ans)"""
+
+    fitness = Fitness.Fitness('my')
+    crossover = Crossover.Crossover('single_point_crossover')
+    # Можно выбрать: inbreeding_NN,
+    #                 outbreeding_NN
+    #                 panmixia_NN
+    #                 tournament_selection_NN
+    #                 roulette_selection_NN
+    selection = Selection.Selection('inbreeding_NN')
+    mutation = Mutation.Mutation('binary_mutation')
+    populationGen = Population.Population('elite_selection')
+    bga = BasicGeneticAlgorithm.BasicGeneticAlgorithm(generator=genPopulation_NN,
+                                                      fitness=fitness,
+                                                      crossover=crossover,
+                                                      selection=selection,
+                                                      mutation=mutation,
+                                                      sizeOfPopulation=100,
+                                                      genPopulation=populationGen,
+                                                      numberChromosome=100, epoche=100)
     ans = bga.fit()
     print(ans)
