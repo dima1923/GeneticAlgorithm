@@ -101,17 +101,19 @@ class Mutation(Base):
         print(new_pop)
         return new_pop
 
-"""
+
     def insertion_deleting_mutation_NN(self, population):
-        
+        """
         Замена у особи одного случайно выбранного гена случайно выбранным значением из диапазона всевозможных значений генов
         :param population: массив особей
         :return: измененный массив особей (изменена только 1 особь)
-        
-        chance_to_mutate = 0.05;  # probabitity of mutatation
+        """
+        min_ = 1
+        max_ = 10
+        chance_to_mutate = 0.05  # probabitity of mutatation
         for i in range(len(population)):
             if chance_to_mutate > random():
                 place_to_modify = randint(1, len(population[i]) - 2)
                 population[i][place_to_modify] = randint(min_, max_)
         return population
-"""
+

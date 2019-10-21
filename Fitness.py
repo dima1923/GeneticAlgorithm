@@ -4,6 +4,10 @@ import math
 from numpy import exp, average
 import time
 from keras.layers import Dense, Dropout
+from sklearn.model_selection import train_test_split
+from keras.utils.np_utils import to_categorical
+from keras.models import Sequential
+import pandas as pd
 
 ## import time
 
@@ -50,12 +54,27 @@ class Fitness(Base):
             fit.append(sum)
         return fit
 
-    def compile_model(network, input_shape):
+
+    def split_train_test(self, path, test):
+        n_class = 3
+        data = pd.read_excel(path, sheet_name='fullData')
+        X_matrix = data[['X3', 'X4', 'X20', 'X28', 'X38']]
+        Y_matrix = data['Y']
+        X_train, X_test, y_train, y_test = train_test_split(X_matrix, Y_matrix, test_size=(1 - test), random_state=42)
+        input_shape = (5,)
+        batch_size = 10
+        # convert class vectors to binary class matrices
+        y_train = to_categorical(y_train, n_class)
+        y_test = to_categorical(y_test, n_class)
+        return input_shape, X_train, X_test, y_train, y_test, batch_size
+
+    def compile_model(eslf, network, input_shape):
         """Compile a sequential model.
         Args: network (dict): the parameters of the network
         Returns: a compiled network.
         """
         # Get our network parameters.
+        n_class = 3
         nb_layers = network[2]
         model = Sequential()
         model.add(Dense(5, activation='sigmoid', input_shape=input_shape))
@@ -73,42 +92,27 @@ class Fitness(Base):
                       metrics=['accuracy'])
         return model
 
-    def train_and_score_NN(network):
-        nb_classes = network[-1]
-        input_shape, X_train, X_test, y_train, y_test, batch_size = split_train_test(path, network[1])
+    def train_and_score_NN(self, network):
+        #nb_classes = network[-1]
+        input_shape, X_train, X_test, y_train, y_test, batch_size = self.split_train_test(path, network[1])
 
-        model = compile_model(network, input_shape)
-
+        model = self.compile_model(network, input_shape)
         model.fit(X_train, y_train,
                   epochs=10000,  # using early stopping, so no real limit
                   verbose=0,
                   validation_data=(X_test, y_test)
                   )
-
         score_test = model.evaluate(X_test, y_test, verbose=0)
         score_train = model.evaluate(X_train, y_train, verbose=0)
-        print("individ\n")
-        print(network)
-        print("\ntest\n")
-        print(score_test)
-        print("\ntrain\n")
-        print(score_train)
-        print("\n")
         return [score_train[1], score_test[1]]  # 1 is accuracy. 0 is loss.
 
     def fitness_indiv_NN(self, indiv):
-        res_of_train = train_and_score_NN(indiv)
+        res_of_train = self.train_and_score_NN(indiv)
         return res_of_train[0] * indiv[1] + (1 - indiv[1]) * res_of_train[1]
 
     def fitness_population_NN(self, population):
-        start_time = time.time()
-
         population_fitness = []
         for item in population:
             population_fitness.append(self.fitness_indiv_NN(item))
-
-        end_time = time.time()
-        print("Process take {0}  seconds ".format(end_time - start_time))
-
         return population_fitness
 

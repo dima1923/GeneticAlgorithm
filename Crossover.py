@@ -29,17 +29,16 @@ class Crossover(Base):
             parents = np.delete(parents, index_of_parent, 0)
         return tmp
 
-"""
 
-    def crossover_NN(self, parents):
-        
+    def crossover_NN(self, parents, **kwargs):
+        """
         Хромосома ребенка наследует в вероятностью 50/50 ген одного из родителей.
         Если длина хромосомы будет наследована от большего родителя, то недостающие
         гены будут также унаследованы у этого родителя
         :param p1: хромосома 1 родителя
         :param p2: хромосома 2 родителя
         :return: хромосома наследников
-        
+        """
         MainPos=2
         p1 = parents[0]
         p2 = parents[1]
@@ -72,4 +71,3 @@ class Crossover(Base):
         if child[MainPos] == p2[MainPos]:
             child += p2[pos:]
         return child
-"""
